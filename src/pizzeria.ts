@@ -1,13 +1,16 @@
-export default abstract class Pizzeria {
+import { Orderable } from "./orderable";
+import { Pizza, Status } from "./pizza.model";
+
+export abstract class Pizzeria implements Orderable {
     static id = 0;
-    id;
-    name;
-    private pizzasInOrder = [];
+    id: number;
+    name: string;
+    pizzasInOrder: Pizza[] = [];
     private maxPizzasInOven = 10;
-    protected recipes = [];
+    protected recipes: string[] = [];
     private _manager = 'John Doe';
 
-    constructor(name) {
+    constructor(name: string) {
         this.id = Pizzeria.id++;
         this.name = name;
     }
@@ -20,34 +23,18 @@ export default abstract class Pizzeria {
         this._manager = manager;
     }
     
-    order(pizza: string) {
+    order(pizza: Pizza) {
         this.pizzasInOrder.push(pizza);
     }
 
-    private isOvenFull() {
+    changeStatus(index: number, status: Status) {
+        this.pizzasInOrder[index].status = status;
+    }
+
+    isOvenFull() {
         return this.pizzasInOrder.length > this.maxPizzasInOven;
     }
 
-    abstract bake();
+    abstract bake(): void;
 
 }
-
-// class PolishPizzeria extends Pizzeria {
-//     bake() {
-//         return 'Baking in the oven';
-//     }
-// };
-// // laStrada.order('Margherita');
-// // laStrada.manager;
-// // laStrada.manager = 'Jane Doe';
-
-// class American extends Pizzeria {
-//     bake() {
-//         return 'Pizza is baking in the oven';
-//     }
-// };
-
-// const laStrada = new PolishPizzeria('La Strada');
-// const americanHouse = new American('American House');
-// const venezia = new PolishPizzeria('Venezia');
-// venezia.order('Margherita');

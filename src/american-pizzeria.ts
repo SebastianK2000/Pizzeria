@@ -1,4 +1,4 @@
-import Pizzeria from './pizzeria';
+import { Pizzeria } from './pizzeria';
 
 export class AmericanPizzeria extends Pizzeria {
     bake() {

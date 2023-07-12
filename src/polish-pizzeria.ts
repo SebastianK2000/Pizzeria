@@ -1,7 +1,7 @@
-import { PolishPizzeria } from './polish-pizzeria';
+import { Pizzeria } from './pizzeria';
 
-export class PolishPizzeria extends pizzeria {
-    constructor(name, public openAtNight) {
+export class PolishPizzeria extends Pizzeria {
+    constructor(name: string, public openAtNight: boolean) {
         super(name);
     }
     bake() {
